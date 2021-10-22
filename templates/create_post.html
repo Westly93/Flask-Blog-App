@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <form method="post" action="">
+      <fieldset class="container">
+        <legend class="border-bottom text-center mb-3">{{ legend }}</legend>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+          {{ form.title.label(class= 'form-label') }}
+          <div class="input-group input-group-sm">
+            {% if form.title.errors %}
+              {{ form.title(class= 'form-control is-invalid')}}
+              {% for error in form.title.errors %}
+                <div class="invalid-feedback">
+                  <span>{{ error }}</span>
+                </div>
+              {% endfor %}
+              {% else %}
+                {{ form.title(class= 'form-control') }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          {{ form.content.label(class= 'form-label') }}
+          <div class="input-group input-group-sm">
+            {% if form.content.errors %}
+              {{ form.content(class= 'form-control is-invalid')}}
+              {% for error in form.content.errors %}
+                <div class="invalid-feedback">
+                  <span>{{ error }}</span>
+                </div>
+              {% endfor %}
+              {% else %}
+                {{ form.content(class= 'form-control') }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="mb-3 form-group">
+          {{ form.submit(class= 'btn btn-outline-secondary btn-sm') }}
+        </div>
+      </fieldset>
+    </form>
+{% endblock content %}

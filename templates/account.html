@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="media">
+      <img src="{{ image_file }}" class="rounded-circle account-img">
+      <div class="media-body">
+        <h2 class="account-heading">{{ current_user.username}}</h2>
+        <p class="text-secondary">{{ current_user.email }}</p>
+      </div>
+    </div>
+    <form method="post" action="" enctype="multipart/form-data">
+      <fieldset class="container">
+        <legend class="border-bottom text-center mb-3">Account Info</legend>
+        {{ form.hidden_tag() }}
+        <div class=" form-group mb-3">
+          {{ form.username.label(class= 'form-label') }}
+          <div class="input-group input-group-sm">
+            {% if form.username.errors %}
+              {{ form.username(class= 'form-control is-invalid') }}
+              {% for error in form.username.errors %}
+              <div class="invalid-feedback">
+                <span>{{ error }}</span>
+              </div>
+              {% endfor %}
+              {% else %}
+                {{ form.username(class= 'form-control') }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group mb-3 ">
+          {{ form.email.label(class= 'form-label') }}
+          <div class="input-group input-group-sm">
+            {% if form.email.errors %}
+              {{ form.email(class= 'form-control is-invalid') }}
+              {% for error in form.username.errors %}
+              <div class="invalid-feedback">
+                <span>{{ error }}</span>
+              </div>
+              {% endfor %}
+              {% else %}
+                {{ form.email(class= 'form-control') }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          {{ form.picture.label }}
+          {{form.picture(class= 'form-control-file')}}
+          {% if form.picture.errors %}
+            {% for error in form.picture.errors %}
+              <span class="text-danger">{{ error }}</span><br>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div class="mb-3 form-group">
+          {{ form.submit(class= 'btn btn-outline-secondary btn-sm') }}
+        </div>
+      </fieldset>
+    </form>
+{% endblock %}

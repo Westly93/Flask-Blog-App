@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+      <img class="rounded-circle" src="{{ url_for('static', filename= 'profile_pics/'+ post.author.image_file)}}">
+      <small class="border-bottom"><a href="#">{{ post.author.username }}</a> {{ post.date_posted.strftime('%Y-%m-%d') }}</small><br>
+      {% if post.author == current_user %}
+        <div class="">
+          <a href="{{ url_for('posts.update_post', post_id= post.id)}}" class="btn btn-secondary mt-1 mb-1">Update</a>
+          <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Delete
+          </button>
+        </div>
+      {% endif  %}
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.content }}</p>
+  </div>
+  <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form class="" action="{{ url_for('posts.delete_post', post_id= post.id) }}" method="post">
+          <input type="submit" class="btn btn-danger" value="Delete">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
